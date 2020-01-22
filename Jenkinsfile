@@ -1,30 +1,10 @@
 pipeline {
-    agent any
+    agent { docker 'php' }
     stages {
-        stage('No-op') {
+        stage('build') {
             steps {
-                sh 'ls'
+                sh 'php --version'
             }
-        }
-    }
-    post {
-        always {
-            echo 'One way or another, I have finished'
-            deleteDir() /* clean up our workspace */
-        }
-        success {
-            echo 'I succeeeded!'
-        }
-        unstable {
-            echo 'I am unstable :/'
-        }
-        failure {
-             mail to: 'wslhdu@163.com',
-                  subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-                  body: "Something is wrong with ${env.BUILD_URL}"
-        }
-        changed {
-            echo 'Things were different before...'
         }
     }
 }
