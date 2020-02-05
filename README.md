@@ -1,3 +1,3 @@
 # jenkinsTest
-test jenkins function
-hello
+- test jenkins function
+- hello
