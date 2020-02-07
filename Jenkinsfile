@@ -6,10 +6,9 @@ pipeline {
                 sh 'php --version'
             }
         }
-
         stage('test') {
             steps {
-                sh 'phpunit'
+                sh '$PWD/vendor/bin/phpunit'
             }
         }
     }
