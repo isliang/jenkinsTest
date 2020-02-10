@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'composer update'
+                sh 'git --version'
             }
         }
         stage('test') {
