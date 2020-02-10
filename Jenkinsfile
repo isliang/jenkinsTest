@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'pwd'
+                sh 'composer update'
             }
         }
         stage('test') {
