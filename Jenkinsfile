@@ -3,13 +3,9 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'composer update'
+                sh 'php -m'
             }
         }
-        stage('test') {
-            steps {
-                sh './vendor/bin/phpunit'
-            }
-        }
+     
     }
 }
