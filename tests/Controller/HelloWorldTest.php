@@ -14,6 +14,6 @@ class HelloWorldTest extends TestCase
 {
     public function testRun()
     {
-        $this->assertTrue(true);
+        $this->assertTrue(false);
     }
 }
