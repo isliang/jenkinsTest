@@ -23,7 +23,6 @@ pipeline {
                 echo $version > $dst_version_file
                 dst_version=$cur_date'.'$version
                 echo $dst_version > ga.version
-                mv jenkinsTest $dst_version
                 '''
             }
         } 
