@@ -23,6 +23,7 @@ pipeline {
                 echo $version > $dst_version_file
                 dst_version=$cur_date'.'$version
                 echo $dst_version > ga.version
+		scp -r * root@115.28.186.0:/data1/www/htdocs/jenkinsTest/$dst_version/
                 '''
             }
         } 
