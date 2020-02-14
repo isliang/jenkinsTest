@@ -23,7 +23,9 @@ pipeline {
                 echo $version > $dst_version_file
                 dst_version=$cur_date'.'$version
                 echo $dst_version > ga.version
-		scp -r * root@115.28.186.0:/data1/www/htdocs/jenkinsTest/$dst_version/
+		git archive --format=tar HEAD | (rm -rf $dst_version && mkdir $dst_version && cd $dst_version && tar xf -)
+		cp -r vendor $dst_version/                
+		scp -r $dst_version ga.version root@115.28.186.0:/data1/www/htdocs/jenkinsTest/
                 '''
             }
         } 
