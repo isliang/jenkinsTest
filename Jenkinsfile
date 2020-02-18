@@ -33,7 +33,7 @@ pipeline {
                 echo $dst_version > ga.version
 		git archive --format=tar HEAD | (rm -rf $dst_version && mkdir $dst_version && cd $dst_version && tar xf -)
 		cp -r vendor $dst_version/                
-		scp -r $dst_version ga.version root@115.28.186.0:/data1/www/htdocs/jenkinsTest/
+		scp -i $SSH_KEY_FOR_ABC -r $dst_version ga.version root@115.28.186.0:/data1/www/htdocs/jenkinsTest/
                 '''
 		}
             }
