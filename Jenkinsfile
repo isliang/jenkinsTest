@@ -24,12 +24,7 @@ pipeline {
             }
 	}
         stage('deploy') {
-            agent {
-                docker {
-                    image 'php'        
-                    args  '-u root'
-                }
-            }			
+            agent none		
             steps {
                 sh '''
                 cur_date="`date +%Y.%m.%d`"
