@@ -18,7 +18,7 @@ pipeline {
 	}
         stage('deploy') {
             steps {
-		withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'baiduyun')]) {}
+		withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'baiduyun', keyFileVariable: 'SSH_KEY_FOR_ABC')]) {}
                 sh '''
                 cur_date="`date +%Y.%m.%d`"
                 dst_version_file=$cur_date'.version'
