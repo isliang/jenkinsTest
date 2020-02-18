@@ -18,7 +18,7 @@ pipeline {
 	}
         stage('deploy') {
             steps {
-		withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'baiduyun', keyFileVariable: 'SSH_KEY_FOR_ABC')]) {}
+		withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'baiduyun', keyFileVariable: 'SSH_KEY_FOR_ABC')]) {
                 sh '''
 		echo $SSH_KEY_FOR_ABC
                 cur_date="`date +%Y.%m.%d`"
@@ -34,6 +34,7 @@ pipeline {
 		cp -r vendor $dst_version/                
 		scp -i $SSH_KEY_FOR_ABC -r $dst_version ga.version root@115.28.186.0:/data1/www/htdocs/jenkinsTest/
                 '''
+		}
             }
         } 
     }
