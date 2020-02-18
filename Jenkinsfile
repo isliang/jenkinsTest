@@ -24,7 +24,12 @@ pipeline {
             }
 	}
         stage('deploy') {
-            agent none		
+            agent {
+                docker {
+                    image 'composer'        
+                    args  '-u root'
+                }
+            }		
             steps {
                 sh '''
                 cur_date="`date +%Y.%m.%d`"
