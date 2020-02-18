@@ -23,14 +23,8 @@ pipeline {
                 sh './vendor/bin/phpunit'
             }
 	}
-        stage('deploy') {
-            agent {
-                docker {
-                    image 'composer'        
-                    args  '-u root'
-                }
-            }		
-            steps {
+        stage('deploy') {     	
+            steps(credentials:['baiduyun']) {
                 sh '''
                 cur_date="`date +%Y.%m.%d`"
                 dst_version_file=$cur_date'.version'
