@@ -1,5 +1,5 @@
 pipeline {
-    agent { docker 'php' }
+    agent { docker 'composer' }
     stages {
         stage('build') {
             steps {
