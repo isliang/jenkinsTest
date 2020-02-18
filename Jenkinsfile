@@ -1,17 +1,35 @@
 pipeline {
-    agent { docker 'composer' }
+    agent none
     stages {
         stage('build') {
+            agent {
+                docker {
+                    image 'composer'        
+                    args  '-u root'
+                }
+            }
             steps {
                 sh 'composer update'
             }
         }
         stage('test') {
+            agent {
+                docker {
+                    image 'php'        
+                    args  '-u root'
+                }
+            }		
             steps {
                 sh './vendor/bin/phpunit'
             }
 	}
         stage('deploy') {
+            agent {
+                docker {
+                    image 'php'        
+                    args  '-u root'
+                }
+            }			
             steps {
                 sh '''
                 cur_date="`date +%Y.%m.%d`"
