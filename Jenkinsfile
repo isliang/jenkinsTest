@@ -9,7 +9,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'composer update'
+                
             }
         }
         stage('test') {
@@ -23,7 +23,13 @@ pipeline {
                 sh './vendor/bin/phpunit'
             }
 	}
-        stage('deploy') {     	
+        stage('deploy') {
+            agent {
+                docker {
+                    image 'composer'        
+                    args  '-u root'
+                }
+            }		
             steps(credentials:['baiduyun']) {
                 sh '''
                 cur_date="`date +%Y.%m.%d`"
