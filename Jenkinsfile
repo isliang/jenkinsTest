@@ -20,6 +20,7 @@ pipeline {
             steps {
 		withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'baiduyun', keyFileVariable: 'SSH_KEY_FOR_ABC')]) {}
                 sh '''
+		echo $SSH_KEY_FOR_ABC
                 cur_date="`date +%Y.%m.%d`"
                 dst_version_file=$cur_date'.version'
                 if [ ! -f $dst_version_file ];then
