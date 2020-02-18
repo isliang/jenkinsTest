@@ -1,36 +1,24 @@
 pipeline {
-    agent none
+    agent {
+        docker {
+            image 'composer'        
+            args  '-u root'
+        }
+    }
     stages {
         stage('build') {
-            agent {
-                docker {
-                    image 'composer'        
-                    args  '-u root'
-                }
-            }
             steps {
                 sh 'pwd'
             }
         }
         stage('test') {
-            agent {
-                docker {
-                    image 'php'        
-                    args  '-u root'
-                }
-            }		
             steps {
                 sh './vendor/bin/phpunit'
             }
 	}
         stage('deploy') {
-            agent {
-                docker {
-                    image 'composer'        
-                    args  '-u root'
-                }
-            }		
-            steps(credentials:['baiduyun']) {
+            steps {
+		withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'baiduyun')]) {}
                 sh '''
                 cur_date="`date +%Y.%m.%d`"
                 dst_version_file=$cur_date'.version'
