@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'composer'        
-            args  '-u root'
-        }
-    }
+    agent none
     stages {
         stage('build') {
             steps {
