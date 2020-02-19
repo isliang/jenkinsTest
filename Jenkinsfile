@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'pwd'
+                sh 'composer update'
             }
         }
         stage('test') {
@@ -18,10 +18,9 @@ pipeline {
 	}
         stage('deploy') {
             steps {
-		withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'baiduyun', keyFileVariable: 'SSH_KEY_FOR_ABC')]) {
+		
                 sh '''
-		cat $SSH_KEY_FOR_ABC
-		ls -l $SSH_KEY_FOR_ABC
+		
                 cur_date="`date +%Y.%m.%d`"
                 dst_version_file=$cur_date'.version'
                 if [ ! -f $dst_version_file ];then
@@ -33,9 +32,9 @@ pipeline {
                 echo $dst_version > ga.version
 		git archive --format=tar HEAD | (rm -rf $dst_version && mkdir $dst_version && cd $dst_version && tar xf -)
 		cp -r vendor $dst_version/                
-		scp -i $SSH_KEY_FOR_ABC -r $dst_version ga.version root@115.28.186.0:/data1/www/htdocs/jenkinsTest/
+		scp  -r $dst_version ga.version root@115.28.186.0:/data1/www/htdocs/jenkinsTest/
                 '''
-		}
+		
             }
         } 
     }
