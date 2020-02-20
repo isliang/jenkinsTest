@@ -2,7 +2,7 @@ pipeline {
     agent {
 	    docker {
 		    image 'php'
-		    args '-v /usr/bin/scp:/usr/bin/scp'
+		    
 	    }
     }
     stages {
