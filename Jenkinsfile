@@ -10,7 +10,7 @@ pipeline {
                
                 echo 123 > ga.version
 		           
-		scp   ga.version root@115.28.186.0:/data1/www/htdocs/jenkinsTest/
+		scp   ga.version root@106.13.95.221:/data1/www/htdocs/jenkinsTest/
                 '''
 		
             }
